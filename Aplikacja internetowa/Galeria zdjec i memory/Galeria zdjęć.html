@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+body{
+    width: 100%;
+    background-color: DarkGray; 
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+div { position: absolute}
+.mini { border:Gainsboro 2px solid; top:50px; width:100px; height:100px}
+.mini img { width:100px; height:100px}
+#ekran  {width:500px; height: 500px; top:200px; left:50px}
+#ekran img{ border:Gainsboro 5px solid;width:500px; height: 500px}
+.mini:hover{ border:Gainsboro 5px solid}
+</style>
+<script>
+function Wyswietl(x)
+{
+    ekran.innerHTML=x.innerHTML;
+}
+</script>
+</head>
+<body>
+<div id="oknoGłówne">
+<div class="mini" id="a1" style="left:50px;" onclick="Wyswietl(this)"><img src="1.jpeg"></div>
+<div class="mini" id="b1" style="left:150px;" onclick="Wyswietl(this)"><img src="2.jpg"></div>
+<div class="mini" id="c1" style="left:250px;" onclick="Wyswietl(this)"><img src="3.jpg"></div>
+<div class="mini" id="d1" style="left:350px;" onclick="Wyswietl(this)"><img src="4.jpg"></div>
+<div class="mini" id="e1" style="left:450px;" onclick="Wyswietl(this)"><img src="5.jfif"></div>
+<div class="mini" id="f1" style="left:550px;" onclick="Wyswietl(this)"><img src="6.jfif"></div>
+<div id="ekran"></div>
+</div>
+</body>
+</html>

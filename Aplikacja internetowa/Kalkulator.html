@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kalkulator</title>
+	
+	
+<style>
+body{
+    width: 100%;
+    background-color: DimGray; 
+    margin: 0;
+    padding: 0;
+    display: block;
+    color: black;
+}
+#div2{
+    float: left;
+    background-color: Gainsboro;
+    text-align: center;
+    height: 80%;
+    width: 100%;
+    color: black;
+}
+
+</style>
+	
+	
+	
+	
+	
+    <script>
+        function dodaj()
+        {
+            form1.c1.value = parseFloat(form1.a1.value) + parseFloat(form1.b1.value);
+        }
+		function odejmij()
+        {
+            form1.c1.value = parseFloat(form1.a1.value) - parseFloat(form1.b1.value);
+        }
+		function razy()
+        {
+            form1.c1.value = parseFloat(form1.a1.value) * parseFloat(form1.b1.value);
+        }
+		function podziel()
+        {
+			if(form1.b1.value==0)
+            {
+				alert("Nie dziel przez 0!")
+            }
+            else
+            form1.c1.value = parseFloat(form1.a1.value) / parseFloat(form1.b1.value);
+        }
+        function pierwiastek()
+        {
+			let q=prompt("Podaj wartość pierwiastka kwadratowego:", "");
+            alert("Pierwiastek kwadratowy z liczby wynosi: " +Math.sqrt(q));
+        }
+		function silnia()
+        {
+			n = prompt("Podaj wartosc do silni:", "");
+			i = 1;
+			s = 1;
+			while (i <= n) s *= i++;
+			alert(n + '! = ' + s);
+        }
+		function potega()
+		{
+			n = prompt("Podaj liczbę n do spotęgowania 2", "");
+			alert("2^"+n+" = "+Math.pow(2,n));
+        }
+    </script>
+</head>
+<body>
+    <div id="div2">
+        <form name="form1">
+            <h1>Kalkulator</h1>
+            <input type="text" name="a1" size="5">
+            <input type="button" onclick="dodaj()" value="+">
+			<input type="button" onclick="odejmij()" value="-">
+			<input type="button" onclick="razy()" value="*">
+			<input type="button" onclick="podziel()" value="/">
+            <input type="text" name="b1" size="5"><br><hr>			
+            <input type="text" name="c1" size="5"><br><hr>
+            <input type="button" onclick="pierwiastek()" value="&radic;">
+            <input type="button" onclick="silnia()" value="!">
+            <input type="button" onclick="potega()" value="2^n">			
+            </fieldset>
+ 
+            
+        </form>
+    </div>
+</body>
+</html>

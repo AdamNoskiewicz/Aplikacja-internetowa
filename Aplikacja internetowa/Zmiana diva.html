@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zmiana diva</title>
+    <style>
+        #div1
+        {
+            position: absolute;
+            width: 200px;
+            height: 300px;
+            top: 200px;
+            left: 200px;
+            margin: 10px;
+            padding: 15px;
+            border: beige 5px solid;
+            background-color: blue;
+        }
+        #div2
+        {
+			position: absolute;
+            width: 350px;
+            height: 400px;
+            top: 525px;
+            left: 425px;
+            margin: 20px;
+            padding: 25px;
+            border: red 5px dashed;
+            background-color: green;
+        }
+    </style>
+    <script>
+        function powitanie()
+        {
+            let x=prompt("Podaj imię", "");
+            alert("Witaj na stronie "+x);
+        }
+        function dodaj()
+        {
+            form1.c1.value = parseFloat(form1.a1.value) + parseFloat(form1.b1.value);
+        }
+		function odejmij()
+        {
+            form1.c1.value = parseFloat(form1.a1.value) - parseFloat(form1.b1.value);
+        }
+		function razy()
+        {
+            form1.c1.value = parseFloat(form1.a1.value) * parseFloat(form1.b1.value);
+        }
+		function podziel()
+        {
+			if(form1.b1.value==0)
+            {
+				alert("Nie dziel przez 0!")
+            }
+            else
+            form1.c1.value = parseFloat(form1.a1.value) / parseFloat(form1.b1.value);
+        }
+        function pierwiastek()
+        {
+			let q=prompt("Podaj wartość pierwiastka kwadratowego:", "");
+            alert("Pierwiastek kwadratowy z liczby wynosi: " +Math.sqrt(q));
+        }
+		function silnia()
+        {
+			n = prompt("n:", "");
+			i = 1;
+			s = 1;
+			while (i <= n) s *= i++;
+			alert(n + '! = ' + s);
+        }
+		function potega()
+		{
+			n = prompt("n:", "");
+			alert("2^"+n+" = "+Math.pow(2,n));
+        }
+        function zmianaLeft()
+        {
+            div1.style.left=form2.a2.value+"px";
+        }
+		function zmianaTop()
+        {
+            div1.style.top=form2.a3.value+"px";
+        }
+		function zmianaKoloru()
+        {
+            div2.style.backgroundColor=r2.z2.value;
+        }
+		function zmianaKoloru2()
+        {
+            div1.style.backgroundColor=r1.z1.value;
+        }
+    </script>
+</head>
+<body>
+    <form name="form2">
+		Lewo/Prawo<input type="text" name="a2" size="5">
+		<input type="button" value="zmiana" onclick="zmianaLeft()"></br>
+		Góra/Dół<input type="text" name="a3" size="5">
+		<input type="button" value="zmiana" onclick="zmianaTop()">
+    </form>
+	<form name="r1">
+	<input type="color" name="z1" size="5">
+	<input type="button" value="zmiana" onclick="zmianaKoloru2()">	
+    </form>
+    <div id="div1" onclick="powitanie()">
+	</div>
+    <div id="div2">
+		<form name="r2">
+				<input type="color" name="z2" size="5">
+				<input type="button" value="zmiana" onclick="zmianaKoloru()">
+        </form>
+        <form name="form1">
+            <fieldset><legend>Kalkulator</legend>
+            <input type="text" name="a1" size="5">
+            <input type="button" onclick="dodaj()" value="+">
+			<input type="button" onclick="odejmij()" value="-">
+			<input type="button" onclick="razy()" value="*">
+			<input type="button" onclick="podziel()" value="/">
+            <input type="text" name="b1" size="5"><br><hr>			
+            <input type="text" name="c1" size="5">
+            <input type="button" onclick="pierwiastek()" value="sqrt">
+            <input type="button" onclick="silnia()" value="!">
+            <input type="button" onclick="potega()" value="2^n">			
+            </fieldset>
+ 
+            
+        </form>
+    </div>
+</body>
+</html>

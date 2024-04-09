@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Kółko i Krzyżyk</title>
+    <link rel="stylesheet">
+<script></script></head>
+<style>
+section 
+{
+background-color:Gainsboro;
+text-align: center;
+}
+.kwadrat {
+display: grid;
+grid-template-columns: repeat(3, auto);
+width: 306px;
+margin: 50px auto;
+}
+.cell
+{
+width: 100px;
+height: 100px;
+border: 1px solid ;
+cursor: pointer;
+line-height: 100px;
+font-size: 60px;
+font-family: "Brush Script MT", cursive;
+}
+</style>
+	<body style="background-color:DimGray;">
+	<section>
+	<h1 style="font-size: xx-large">Kółko i Krzyżyk</h1>
+	<div class="kwadrat">
+	<div data-cell-index="0" class="cell"></div>
+	<div data-cell-index="1" class="cell"></div>
+	<div data-cell-index="2" class="cell"></div>
+	<div data-cell-index="3" class="cell"></div>
+	<div data-cell-index="4" class="cell"></div>
+	<div data-cell-index="5" class="cell"></div>
+	<div data-cell-index="6" class="cell"></div>
+	<div data-cell-index="7" class="cell"></div>
+	<div data-cell-index="8" class="cell"></div>
+	</div>
+	<h2 class="status" ></h2>
+	<button class="restart">Zrestartuj grę</button>
+</section>
+<script >
+	const wyswietl = document.querySelector('.status');
+    let CzyGraAktywna = true;
+    let Gracz = "X";
+    let stan = ["", "", "", "", "", "", "", "", ""];
+    const wygrana = () => `Wygrał gracz ${Gracz}!`;
+    const remis = () => `Remis`;
+    const kolejność = () => `Kolej gracza ${Gracz}`;
+    wyswietl.innerHTML = kolejność();
+    const warunek = [[0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],
+        [1, 4, 7],[2, 5, 8],[0, 4, 8],[2, 4, 6]];
+    function wybór(obecnaKomórka, obecnaKomórkaIndeks) 
+	{
+        stan[obecnaKomórkaIndeks] = Gracz;
+        obecnaKomórka.innerHTML = Gracz;
+    }
+    function zmiana() 
+	{
+        Gracz = Gracz === "X" ? "O" : "X";
+        wyswietl.innerHTML = kolejność();
+    }
+    function wynik()
+	{
+        let wygranaRunda = false;
+        for (let i = 0; i <= 7; i++) 
+		{
+            const warunekWygranej = warunek[i];
+            let x = stan[warunekWygranej[0]];
+            let y = stan[warunekWygranej[1]];
+            let z = stan[warunekWygranej[2]];
+            if (x === '' || y === '' || z === '') {
+                continue;
+            }
+            if (x === y && y === z) {
+                wygranaRunda = true;
+                break
+            }
+        }
+        if (wygranaRunda) 
+		{
+            wyswietl.innerHTML = wygrana();
+            CzyGraAktywna = false;
+            return;
+        }
+        let czyRemis = !stan.includes("");
+        if (czyRemis) 
+		{
+            wyswietl.innerHTML = remis();
+            CzyGraAktywna = false;
+            return;
+        }
+        zmiana();
+    }
+    function obecnaKomórkaFun(gdyObecnaKomórka) {
+        const obecnaKomórka = gdyObecnaKomórka.target;
+        const obecnaKomórkaIndeks = parseInt(obecnaKomórka.getAttribute('data-cell-index'));
+        if (stan[obecnaKomórkaIndeks] !== "" || !CzyGraAktywna) 
+		{
+            return;
+        }
+        wybór(obecnaKomórka, obecnaKomórkaIndeks);
+        wynik();
+    }
+    function RestartGame() 
+	{
+        CzyGraAktywna = true;
+        Gracz = "X";
+        stan = ["", "", "", "", "", "", "", "", ""];
+        wyswietl.innerHTML = kolejność();
+        document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
+    }
+document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', obecnaKomórkaFun));
+document.querySelector('.restart').addEventListener('click', RestartGame);</script>
+<script></script></body>
+</html>

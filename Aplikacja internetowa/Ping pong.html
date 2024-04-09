@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name ="viewport" content=
+      "width=device-width, initial-scale=1.0">
+    <title>Ping pong</title>
+    <style>
+      *{
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100vh;
+        width: 100vw;
+        background: DimGray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .tablica {
+        height: 85vh;
+        width: 80vw;
+        background:Grey ;
+      }
+      .kółko {
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        position: fixed;
+        top: calc(50% - 15px);
+        left: calc(50% - 15px);
+      }
+      .właściwości_kółka {
+        height: 100%;
+        width: 100%;
+        border-radius: 100px;
+        background: white;
+      }
+      .prostokąt {
+        height: 100px;
+        width: 18px;
+        position: fixed;
+      }
+      .prostokąt_1 {
+        top: calc(7.5vh + 55px);
+        left: calc(10vw + 30px);
+        background: white;
+      }
+      .prostokąt_2 {
+        top: calc(85vh + 7.5vh - 100px - 55px);
+        right: calc(10vw + 30px);
+        background: white;
+      }
+  
+      .gracz1_wynik {
+        height: 50px;
+        width: 50px;
+        color: white;
+        position: fixed;
+        left: 30vw;
+        margin-top: 30px;
+      }
+  
+      .gracz2_wynik {
+        height: 50px;
+        width: 50px;
+        color: white;
+        position: fixed;
+        left: 70vw;
+        margin-top: 30px;
+      }
+  
+      .msg {
+        position: fixed;
+        height: 10vh;
+        width: 30vw;
+        color: white;
+        left: 38vw;
+        margin: 30px auto auto auto;
+      }
+    </style>
+</head>
+    
+<body>
+  <div class="tablica">
+      <div class='kółko'>
+        <div class="właściwości_kółka"></div>
+      </div>
+      <div class="prostokąt_1 prostokąt"></div>
+      <div class="prostokąt_2  prostokąt"></div>
+      <h1 class = "gracz1_wynik">0</h1>
+      <h1 class="gracz2_wynik">0</h1>
+      <h1 class="msg">Naciśnij V</h1>
+  </div>
+  <script>
+    let stan = 'start';
+    let prostokąt_1 = document.querySelector('.prostokąt_1');
+    let prostokąt_2 = document.querySelector('.prostokąt_2');
+    let tablica = document.querySelector('.tablica');
+    let piłkaWstępna = document.querySelector('.kółko');
+    let kółko = document.querySelector('.kółko');
+    let wynik1 = document.querySelector('.gracz1_wynik');
+    let wynik2 = document.querySelector('.gracz2_wynik');
+    let msg = document.querySelector('.msg');
+    let otoczenieProstokąta1 = prostokąt_1.getBoundingClientRect();
+    let otoczenieProstokąta2 = prostokąt_2.getBoundingClientRect();
+    let piłkaWstępna_otoczenie = kółko.getBoundingClientRect();
+    let otoczeniePiłki = piłkaWstępna_otoczenie;
+    let kort = tablica.getBoundingClientRect();
+    let prostokąt = document.querySelector('.prostokąt').getBoundingClientRect();
+    let x = Math.floor(Math.random() * 4) + 3;
+    let y = Math.floor(Math.random() * 4) + 3;
+    let xx = Math.floor(Math.random() * 2);
+    let yy = Math.floor(Math.random() * 2);
+  
+    document.addEventListener('keydown', (c) => {
+      if (c.key == 'v') {
+        stan = stan == 'start' ? 'play' : 'start';
+        if (stan == 'play') {
+          msg.innerHTML = '';
+          msg.style.left = 42 + 'vw';
+          requestAnimationFrame(() => {
+            x = Math.floor(Math.random() * 4) + 3;
+            y = Math.floor(Math.random() * 4) + 3;
+            xx = Math.floor(Math.random() * 2);
+            yy = Math.floor(Math.random() * 2);
+            ruch(x, y, xx, yy);
+          });
+        }
+      }
+      if (stan == 'play') {
+        if (c.key == 'w') {
+          prostokąt_1.style.top =
+            Math.max(
+              kort.top,
+              otoczenieProstokąta1.top - window.innerHeight * 0.06
+            ) + 'px';
+          otoczenieProstokąta1 = prostokąt_1.getBoundingClientRect();
+        }
+        if (c.key == 's') {
+          prostokąt_1.style.top =
+            Math.min(
+              kort.bottom - prostokąt.height,
+              otoczenieProstokąta1.top + window.innerHeight * 0.06
+            ) + 'px';
+          otoczenieProstokąta1 = prostokąt_1.getBoundingClientRect();
+        }
+  
+        if (c.key == 'ArrowUp') {
+          prostokąt_2.style.top =
+            Math.max(
+              kort.top,
+              otoczenieProstokąta2.top - window.innerHeight * 0.1
+            ) + 'px';
+          otoczenieProstokąta2 = prostokąt_2.getBoundingClientRect();
+        }
+        if (c.key == 'ArrowDown') {
+          prostokąt_2.style.top =
+            Math.min(
+              kort.bottom - prostokąt.height,
+              otoczenieProstokąta2.top + window.innerHeight * 0.1
+            ) + 'px';
+          otoczenieProstokąta2 = prostokąt_2.getBoundingClientRect();
+        }
+      }
+    });
+  
+    function ruch(x, y, xx, yy) {
+      if (otoczeniePiłki.top <= kort.top) {
+        yy = 1;
+      }
+      if (otoczeniePiłki.bottom >= kort.bottom) {
+        yy = 0;
+      }
+      if (
+        otoczeniePiłki.left <= otoczenieProstokąta1.right &&
+        otoczeniePiłki.top >= otoczenieProstokąta1.top &&
+        otoczeniePiłki.bottom <= otoczenieProstokąta1.bottom
+      ) {
+        xx = 1;
+        x = Math.floor(Math.random() * 4) + 3;
+        y = Math.floor(Math.random() * 4) + 3;
+      }
+      if (
+        otoczeniePiłki.right >= otoczenieProstokąta2.left &&
+        otoczeniePiłki.top >= otoczenieProstokąta2.top &&
+        otoczeniePiłki.bottom <= otoczenieProstokąta2.bottom
+      ) {
+        xx = 0;
+        x = Math.floor(Math.random() * 4) + 3;
+        y = Math.floor(Math.random() * 4) + 3;
+      }
+      if (
+        otoczeniePiłki.left <= kort.left ||
+        otoczeniePiłki.right >= kort.right
+      ) {
+        if (otoczeniePiłki.left <= kort.left) {
+          wynik2.innerHTML = +wynik2.innerHTML + 1;
+        } else {
+          wynik1.innerHTML = +wynik1.innerHTML + 1;
+        }
+        stan = 'start';
+  
+        otoczeniePiłki = piłkaWstępna_otoczenie;
+        kółko.style = piłkaWstępna.style;
+        msg.innerHTML = 'Naciśnij v';
+        msg.style.left = 38 + 'vw';
+        return;
+      }
+      kółko.style.top = otoczeniePiłki.top + y * (yy == 0 ? -1 : 1) + 'px';
+      kółko.style.left = otoczeniePiłki.left + x * (xx == 0 ? -1 : 1) + 'px';
+      otoczeniePiłki = kółko.getBoundingClientRect();
+      requestAnimationFrame(() => {
+        ruch(x, y, xx, yy);
+      });
+    }
+  </script>
+</body>  
+</html>

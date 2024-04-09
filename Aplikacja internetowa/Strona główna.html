@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Strona głowna</title>
+    <style>
+    body {
+        background-color:DimGray;
+        font-family: Garamond, serif;
+        text-align: center;
+        color: black;
+    }
+    p{
+        text-align:right;
+        font-weight: bold;
+    }
+    a{
+        font-size: 30px;
+    }
+    h1{
+        font-size: 75px;
+    }
+	div{
+	position:absolute bottom:1cm;
+	text-align: center;
+	background-color: Gainsboro;
+	}
+	div1{
+	position:absolute bottom:1cm;
+	text-align: center;
+	}
+	
+    </style>
+	<script>
+	function zmianaKoloru()
+        {
+            div1.style.backgroundColor=r2.z2.value;
+			div2.style.backgroundColor=r2.z2.value;
+        }
+	</script>
+    </head>
+
+    <body>
+	<div id="div1">
+        <h1>Strona główna projektu</h1>
+		<a href="Zmiana diva.html">Zmiana diva</a><br>
+        <a href="Kalkulator.html">Kalkulator</a><br>
+        <a href="Galeria zdjec i memory\Galeria zdjęć.html">Galeria zdjęć</a><br>
+        <a href="Galeria zdjec i memory\Memory.html">Gra memory</a><br>
+        <a href="Kółko i krzyżyk.html">Kółko i krzyżyk</a><br>
+        <a href="Gra piętnastka\Piętnastka.html">Piętnastka</a><br>
+        <a href="Ping pong.html">Ping pong</a><br>
+        <div id="div2">
+		<form name="r2">
+				<input type="color" name="z2" size="5">
+				<input type="button" value="Zmień kolor tła" onclick="zmianaKoloru()">
+        </form>
+		Adam Noskiewicz, numer albumu: 402131
+		</div>
+	</div>
+    </body>
+
+</html>
